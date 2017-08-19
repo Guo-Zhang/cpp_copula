@@ -1,58 +1,46 @@
-#! usr/bin/env python
-# -*- coding:utf-8 -*-
-from __future__ import print_function, unicode_literals
+#! usr/bin/python
 
 
-# ========== import packages ==========
-
-# import third-party packages
-import numpy as np
-
-
-# ========== class definition ==========
-
-# ----- Base Classes of Coupla ------
-class Copula(object):
+class Copula:
     """
     Note to reader: Each bivariate copula should be its own subclass that implements the following methods.
     """
 
-    def __init__(self):
+    def __init__():
         pass
 
-    def pdf(self):
+    def pdf():
         """
         Evaluate the probability distribution function (pdf) at a point (u,v) for a parameter theta
         """
         pass
 
-    def cdf(self):
+    def cdf():
         """
         Evaluate the cumulative distribution function (cdf) at a point (u,v) for a parameter theta
         """
         pass
 
-    def rvs(self):
+    def rvs():
         """
         Generate a simulation for the copula given a specified parameter theta.
         """
         pass
 
-    def rho(self):
+    def rho():
         """
         Calculate Spearman's rho for the copula given a specified parameter theta.
         """
         pass
 
-    def tau(self):
+    def tau():
         """
         Calculate Kendall's tau for the copula given a specified parameter theta.
         """
         pass
 
 
-# ---- ARCM Coupla -----
-class JoeCopula(Copula):
+class Joe(Copula):
 
     def pdf(self, u, v, theta):
         """
@@ -66,14 +54,13 @@ class JoeCopula(Copula):
 
     def cdf(self, u, v, theta):
         """
-        $$C(u,v;\theta) = 1-[(1-u)^\theta+(1-v)^\theta-(1-u)^\theta(1-v)^\theta]^{\frac{1}{\theta}}$$
-        where $\theta \leq 1$
+        C(u,v;\theta) = 1-[(1-u)^\theta+(1-v)^\theta-(1-u)^\theta(1-v)^\theta]^{\frac{1}{\theta}}
         :param u:
         :param v:
         :param theta:
         :return:
         """
-        assert theta>=1, 'Parameter theta cannot be less than 1. Please check. '
+        assert theta!=0, 'Parameter theta cannot be zero. Please check. '
         return 1-((1-u)**theta+(1-v)**theta-(1-u)**theta*(1-v)**theta)**(1/float(theta))
 
     def rvs(self):
