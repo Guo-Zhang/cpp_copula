@@ -1,46 +1,58 @@
-#! usr/bin/python
+#! usr/bin/env python
+# -*- coding:utf-8 -*-
+from __future__ import print_function, unicode_literals
 
 
-class Copula:
+# ========== import packages ==========
+
+# import third-party packages
+import numpy as np
+
+
+# ========== class definition ==========
+
+# ----- Base Classes of Coupla ------
+class Copula(object):
     """
     Note to reader: Each bivariate copula should be its own subclass that implements the following methods.
     """
 
-    def __init__():
+    def __init__(self):
         pass
 
-    def pdf():
+    def pdf(self):
         """
         Evaluate the probability distribution function (pdf) at a point (u,v) for a parameter theta
         """
         pass
 
-    def cdf():
+    def cdf(self):
         """
         Evaluate the cumulative distribution function (cdf) at a point (u,v) for a parameter theta
         """
         pass
 
-    def rvs():
+    def rvs(self):
         """
         Generate a simulation for the copula given a specified parameter theta.
         """
         pass
 
-    def rho():
+    def rho(self):
         """
         Calculate Spearman's rho for the copula given a specified parameter theta.
         """
         pass
 
-    def tau():
+    def tau(self):
         """
         Calculate Kendall's tau for the copula given a specified parameter theta.
         """
         pass
 
 
-class Joe(Copula):
+# ---- ARCM Coupla -----
+class JoeCopula(Copula):
 
     def pdf(self, u, v, theta):
         """
@@ -54,13 +66,14 @@ class Joe(Copula):
 
     def cdf(self, u, v, theta):
         """
-        C(u,v;\theta) = 1-[(1-u)^\theta+(1-v)^\theta-(1-u)^\theta(1-v)^\theta]^{\frac{1}{\theta}}
+        $$C(u,v;\theta) = 1-[(1-u)^\theta+(1-v)^\theta-(1-u)^\theta(1-v)^\theta]^{\frac{1}{\theta}}$$
+        where $\theta \leq 1$
         :param u:
         :param v:
         :param theta:
         :return:
         """
-        assert theta!=0, 'Parameter theta cannot be zero. Please check. '
+        assert theta>=1, 'Parameter theta cannot be less than 1. Please check. '
         return 1-((1-u)**theta+(1-v)**theta-(1-u)**theta*(1-v)**theta)**(1/float(theta))
 
     def rvs(self):
